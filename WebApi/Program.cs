@@ -11,12 +11,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using Mapster;
 using Presentation.Mapping;
+using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddSingleton(TypeAdapterConfig.GlobalSettings); // Register Mapster globally
 builder.Services.AddSingleton<IRegister, UserMapping>(); // Register your UserMapping
-
 
 var jwtSettings = builder.Configuration.GetSection("JwtSettings");
 var secretKey = jwtSettings["SecretKey"];
@@ -59,7 +61,41 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyAPI", Version = "v1" });
+
+    // Add JWT Authentication to Swagger
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Name = "Authorization",
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        In = ParameterLocation.Header,
+        Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            new string[] { }
+        }
+    });
+
+    //c.EnableAnnotations(); // Enable Swagger annotations
+
+});
+
 builder.Services.AddApplication().AddInfrastructure().AddPresentation();
 
 var app = builder.Build();

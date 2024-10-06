@@ -23,7 +23,8 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, Result<UserR
             Email: result.Email,
             PhoneNumber: result.PhoneNumber,
             Balance: result.Balance,
-            DateOfBirth: result.DateOfBirth
+            DateOfBirth: result.DateOfBirth,
+            IsAdmin: result.IsAdmin
             ));
     }
 }

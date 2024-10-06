@@ -9,4 +9,5 @@ public record UpdateUserRequest(
     [Required][EmailAddress] string Email,
     [Required][Phone] string PhoneNumber,
     [Required] DateTime DateOfBirth,
+    [Required] double Balance,
     [Required] string Password);

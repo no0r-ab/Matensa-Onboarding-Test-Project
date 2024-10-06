@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace Domain.Users;
+﻿namespace Domain.Users;
 
 public class User : Entity
 {
@@ -12,9 +10,9 @@ public class User : Entity
     public DateTime DateOfBirth { get; set; }
     public string Password { get; set; }
     public double Balance { get; set; }
+    public bool IsAdmin { get; set; }
 
-
-    private User(Guid id, string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth)
+    private User(Guid id, string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)
     {
         Id = id;
         FirstName = firstName;
@@ -23,9 +21,10 @@ public class User : Entity
         PhoneNumber = phoneNumber;
         Balance = balance;
         DateOfBirth = dateOfBirth;
+        IsAdmin = isAdmin;
     }
 
-    private User(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth)
+    private User(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)
     {
         FirstName = firstName;
         LastName = lastName;
@@ -33,16 +32,17 @@ public class User : Entity
         PhoneNumber = phoneNumber;
         Balance = balance;
         DateOfBirth = dateOfBirth;
+        IsAdmin = isAdmin;
     }
 
-    public static User Create(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth)
+    public static User Create(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)
     {
-        return new(Guid.NewGuid(), firstName, lastName, email, phoneNumber, balance, dateOfBirth);
+        return new(Guid.NewGuid(), firstName, lastName, email, phoneNumber, balance, dateOfBirth, isAdmin);
     }
 
-    public static User Update(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth)
+    public static User Update(string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)
     {
-        return new(firstName, lastName, email, phoneNumber, balance, dateOfBirth);
+        return new(firstName, lastName, email, phoneNumber, balance, dateOfBirth, isAdmin);
     }
 
     public void SetPassword(string hashedPassword)

@@ -23,7 +23,8 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, Result<IEnum
              Email: user.Email,
              PhoneNumber: user.PhoneNumber,
              Balance: user.Balance,
-             DateOfBirth: user.DateOfBirth
+             DateOfBirth: user.DateOfBirth,
+             IsAdmin: user.IsAdmin
             ));
 
         return Result<IEnumerable<UserResult>>.Success(users);

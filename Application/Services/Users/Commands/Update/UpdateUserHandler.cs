@@ -25,7 +25,7 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Result<UserR
         if (user is null)
             return Result<UserResult>.Failure(Error.NotFound("404", $"User with ID {command.Id} not found."));
 
-        var updatedUser = UserDomain.Update(command.FirstName, command.LastName, command.Email, command.PhoneNumber, command.Balance, command.DateOfBirth);
+        var updatedUser = UserDomain.Update(command.FirstName, command.LastName, command.Email, command.PhoneNumber, command.Balance, command.DateOfBirth, command.IsAdmin);
 
         await _userRepository.UpdateAsync(user);
 
@@ -35,7 +35,8 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Result<UserR
             Email: updatedUser.Email,
             PhoneNumber: updatedUser.PhoneNumber,
             Balance: updatedUser.Balance,
-            DateOfBirth: updatedUser.DateOfBirth
+            DateOfBirth: updatedUser.DateOfBirth,
+            IsAdmin: updatedUser.IsAdmin
             ));
     }
 }

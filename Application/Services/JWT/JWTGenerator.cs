@@ -21,8 +21,10 @@ public class JWTGenerator : IJWTGenerator
         _audience = configuration["JwtSettings:Audience"];
     }
 
-    public string GenerateToken(UserDomain user, string role)
+    public string GenerateToken(UserDomain user)
     {
+        var role = user.IsAdmin ? "Admin" : "User";
+
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),

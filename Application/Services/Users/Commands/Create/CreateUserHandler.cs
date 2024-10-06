@@ -40,7 +40,8 @@ public class CreateUserHandler :
             command.Email,
             command.PhoneNumber,
             command.Balance,
-            command.DateOfBirth);
+            command.DateOfBirth,
+            command.Role.Equals("Admin"));
 
         // Hash the password
         var hashedPassword = _hasher.HashPassword(command.Password);
@@ -48,9 +49,7 @@ public class CreateUserHandler :
 
         await _userRepository.Add(user);
 
-        var role = command.Role ?? "User";  // Default role is "User" if not specified
-
-        var token = _tokenService.GenerateToken(user, role);
+        var token = _tokenService.GenerateToken(user);
 
         // Store the token
         var userToken = new UserToken
@@ -70,7 +69,8 @@ public class CreateUserHandler :
            Email: user.Email,
            PhoneNumber: user.PhoneNumber,
            Balance: user.Balance,
-           DateOfBirth: user.DateOfBirth
+           DateOfBirth: user.DateOfBirth,
+           IsAdmin: user.IsAdmin
         ));
     }
 }

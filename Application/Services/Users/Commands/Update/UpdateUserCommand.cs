@@ -11,4 +11,5 @@ public record UpdateUserCommand(
     string PhoneNumber,
     double Balance,
     DateTime DateOfBirth,
-    string Password) : IRequest<Result<UserResult>>;
+    string Password,
+    bool IsAdmin) : IRequest<Result<UserResult>>;

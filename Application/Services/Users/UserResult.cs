@@ -6,6 +6,7 @@ public record UserResult(
     string Email,
     string PhoneNumber,
     double Balance,
-    DateTime DateOfBirth
+    DateTime DateOfBirth,
+    bool IsAdmin
     );
 

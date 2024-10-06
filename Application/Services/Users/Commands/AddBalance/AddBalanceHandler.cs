@@ -21,13 +21,16 @@ public class AddBalanceHandler : IRequestHandler<AddBalanceCommand, Result<UserR
 
         user.AddAmount(command.Amount);
 
+        await _userRepository.UpdateAsync(user);
+
         return Result<UserResult>.Success(new UserResult(
             Id: user.Id,
             FullName: user.FullName,
             Email: user.Email,
             PhoneNumber: user.PhoneNumber,
             Balance: user.Balance,
-            DateOfBirth: user.DateOfBirth
+            DateOfBirth: user.DateOfBirth,
+            IsAdmin: user.IsAdmin
             ));
     }
 }

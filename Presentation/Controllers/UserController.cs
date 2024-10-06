@@ -45,7 +45,7 @@ public class UsersController : ApiControllerBase
             errors => Problem(errors));
     }
 
-    [AllowAnonymous]
+    //[AllowAnonymous]
     [HttpPost("{role}")]
     public async Task<IActionResult> Create(string role, [FromBody] CreateUserRequest request)
     {
