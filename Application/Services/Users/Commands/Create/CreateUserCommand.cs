@@ -5,7 +5,6 @@ using SharedKernel.Result;
 namespace Application.Services.User.Commands.Create;
 
 public record CreateUserCommand(
-    /*Guid Id,*/
     string FirstName,
     string LastName,
     string Email,

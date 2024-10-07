@@ -29,11 +29,9 @@ public class CreateUserHandler :
 
     public async Task<Result<UserResult>> Handle(CreateUserCommand command, CancellationToken cancellationToken)
     {
-        // Check if the email already exists
         if (_userRepository.GetUserByEmail(command.Email) is not null)
             return Result<UserResult>.Failure(Error.Validation("Email is already in use."));
 
-        // Create the user
         var user = DomainUser.Create(
             command.FirstName,
             command.LastName,
@@ -43,7 +41,6 @@ public class CreateUserHandler :
             command.DateOfBirth,
             command.Role.Equals("Admin"));
 
-        // Hash the password
         var hashedPassword = _hasher.HashPassword(command.Password);
         user.SetPassword(hashedPassword);
 
@@ -51,7 +48,6 @@ public class CreateUserHandler :
 
         var token = _tokenService.GenerateToken(user);
 
-        // Store the token
         var userToken = new UserToken
         {
             UserId = user.Id,
@@ -62,7 +58,6 @@ public class CreateUserHandler :
 
         await _userTokenRepository.AddAsync(userToken);
 
-        // Return the result
         return Result<UserResult>.Success(new UserResult(
            Id: user.Id,
            FullName: user.FullName,

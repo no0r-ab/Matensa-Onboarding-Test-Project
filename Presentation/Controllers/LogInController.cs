@@ -26,5 +26,4 @@ public class LogInController : ApiControllerBase
              value => Ok(value),
             errors => Problem(errors));
     }
-
 }

@@ -14,8 +14,8 @@ public class User : Entity
     public double Balance { get; set; }
     public bool IsAdmin { get; set; }
 
-    public ICollection<Transaction> SentTransactions { get; set; } // Transactions sent by the user
-    public ICollection<Transaction> ReceivedTransactions { get; set; } // Transactions received by the user
+    public ICollection<Transaction> SentTransactions { get; set; }
+    public ICollection<Transaction> ReceivedTransactions { get; set; }
 
 
     private User(Guid id, string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)

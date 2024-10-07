@@ -1,9 +1,5 @@
 ﻿using Domain;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
 
 namespace Infrastructure.Repositories;
 
@@ -114,6 +110,4 @@ public class RepositoryBase<T> : IRepository<T> where T : Entity
             await _context.SaveChangesAsync(cancellationToken);
         }
     }
-
 }
-

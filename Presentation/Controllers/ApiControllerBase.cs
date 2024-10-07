@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Localization;
 using SharedKernel.Result;
 
 namespace Presentation.Controllers;
@@ -14,7 +12,7 @@ public class ApiControllerBase : ControllerBase
 
     protected IActionResult Problem(List<Error> errors)
     {
-        // If there are no errors, return a generic problem
+        
         if (errors.Count is 0)
         {
             HttpContext.Response.StatusCode = StatusCodes.Status500InternalServerError; // Set status code directly

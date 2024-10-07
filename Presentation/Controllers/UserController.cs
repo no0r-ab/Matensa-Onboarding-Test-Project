@@ -13,7 +13,7 @@ using Presentation.Contracts.Users;
 namespace Presentation.Controllers;
 
 [Route("api/users")]
-[Authorize(Roles = "Admin")] // Ensure only admin can access this controller
+[Authorize(Roles = "Admin")]
 public class UsersController : ApiControllerBase
 {
     private readonly ISender _mediator;
@@ -49,9 +49,8 @@ public class UsersController : ApiControllerBase
     [HttpPost("{role}")]
     public async Task<IActionResult> Create(string role, [FromBody] CreateUserRequest request)
     {
-        request.Role = role; // Set the role
+        request.Role = role;
 
-        // Use Mapster's Adapt method to map CreateUserRequest to CreateUserCommand
         var command = request.Adapt<CreateUserCommand>();
 
         var createResult = await _mediator.Send(command);
@@ -87,7 +86,6 @@ public class UsersController : ApiControllerBase
     [HttpPut("{id}/balance")]
     public async Task<IActionResult> AddToInitialBalance([FromBody] AddBalanceRequest request)
     {
-        // Map the request to AddBalanceCommand using Mapster
         var command = new AddBalanceCommand(request.Id, request.Amount);
 
         var response = await _mediator.Send(command);

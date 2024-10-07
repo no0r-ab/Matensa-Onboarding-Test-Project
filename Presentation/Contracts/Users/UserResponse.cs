@@ -1,6 +1,4 @@
-﻿using Domain.Transactions;
-
-namespace Presentation.Contracts.Users;
+﻿namespace Presentation.Contracts.Users;
 
 public record UserResponse(
     Guid Id,

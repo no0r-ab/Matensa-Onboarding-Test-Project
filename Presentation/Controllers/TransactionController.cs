@@ -1,13 +1,12 @@
 ﻿using Application.Services.Transactions.Create;
 using Mapster;
 using MediatR;
-using Microsoft.AspNetCore.Authorization; // Required for [Authorize]
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Contracts.Transaction;
-using Presentation.Contracts.Users;
 using Presentation.Controllers;
 
-[Authorize(Roles = "User")] // Only users with the "User" role can access this controller
+[Authorize(Roles = "User")]
 [ApiController]
 [Route("api/[controller]")]
 public class TransactionController : ApiControllerBase

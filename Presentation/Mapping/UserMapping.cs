@@ -23,4 +23,3 @@ public class UserMapping : IRegister
               .Map(dest => dest, src => src);
     }
 }
-

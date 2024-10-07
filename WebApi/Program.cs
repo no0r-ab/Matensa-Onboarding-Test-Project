@@ -12,7 +12,6 @@ using System.Security.Claims;
 using Mapster;
 using Presentation.Mapping;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Options;
 
 
 var builder = WebApplication.CreateBuilder(args);

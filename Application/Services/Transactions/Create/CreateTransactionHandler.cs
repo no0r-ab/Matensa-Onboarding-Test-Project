@@ -39,11 +39,9 @@ internal class CreateTransactionHandler : IRequestHandler<CreateTransactionComma
 
         sender.RemoveAmount(request.Amount);
         var withdrawTransaction = Transaction.Create(sender.Id, request.ReceiverId, request.Amount, TransactionType.Withdrawal);
-        sender.SentTransactions.Add(withdrawTransaction);
 
         reciever.AddAmount(request.Amount);
         var depositTransaction = Transaction.Create(sender.Id, request.ReceiverId, request.Amount, TransactionType.Deposit);
-        reciever.ReceivedTransactions.Add(depositTransaction);
 
         await _userRepository.UpdateList(new List<UserDomain> { sender, reciever });
         await _transactionRepository.AddList(new List<Transaction> { withdrawTransaction, depositTransaction });

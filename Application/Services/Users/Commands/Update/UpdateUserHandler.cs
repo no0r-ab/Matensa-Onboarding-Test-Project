@@ -15,6 +15,7 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Result<UserR
     {
         _userRepository = userRepository;
     }
+
     public async Task<Result<UserResult>> Handle(UpdateUserCommand command, CancellationToken cancellationToken)
     {
         if (_userRepository.GetUserByEmail(command.Email) is not null)
@@ -42,4 +43,3 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Result<UserR
             ));
     }
 }
-

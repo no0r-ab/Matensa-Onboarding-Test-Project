@@ -13,14 +13,6 @@ public record CreateUserRequest(
     double Balance,
     DateTime DateOfBirth)
 {
-    [JsonIgnore] // This will prevent it from showing in Swagger
-    public string Role { get; set; } = string.Empty; // Initialize with a default value
+    [JsonIgnore]
+    public string Role { get; set; } = string.Empty;
 }
-
-/*public record CreateUserRequest(
-     string FirstName,
-     string LastName,
-     string Email,
-     string PhoneNumber,
-     DateTime DateOfBirth,
-     string Password);*/

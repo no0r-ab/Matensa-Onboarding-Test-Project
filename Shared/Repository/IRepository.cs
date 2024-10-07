@@ -1,7 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
-using SharedKernel.Repository;
-using System.Linq.Expressions;
-using System.Security.Cryptography;
+﻿using SharedKernel.Repository;
 
 public interface IRepository<T> where T : IEntity
 {
@@ -11,7 +8,7 @@ public interface IRepository<T> where T : IEntity
 
     Task<T> Add(T entity);
 
-    Task<IEnumerable<T>> UpdateList (IEnumerable<T> entities);
+    Task<IEnumerable<T>> UpdateList(IEnumerable<T> entities);
 
     Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
@@ -20,6 +17,4 @@ public interface IRepository<T> where T : IEntity
     Task UpdateAsync(T entity, CancellationToken cancellationToken = default);
 
     Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
-
-
 }

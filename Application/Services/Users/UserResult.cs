@@ -13,4 +13,3 @@ public record UserResult(
     ICollection<Transaction> SentTransactions,
     ICollection<Transaction> ReceivedTransactions
     );
-
