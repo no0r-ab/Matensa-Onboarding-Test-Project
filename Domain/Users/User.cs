@@ -1,4 +1,6 @@
-﻿namespace Domain.Users;
+﻿using Domain.Transactions;
+
+namespace Domain.Users;
 
 public class User : Entity
 {
@@ -11,6 +13,10 @@ public class User : Entity
     public string Password { get; set; }
     public double Balance { get; set; }
     public bool IsAdmin { get; set; }
+
+    public ICollection<Transaction> SentTransactions { get; set; } // Transactions sent by the user
+    public ICollection<Transaction> ReceivedTransactions { get; set; } // Transactions received by the user
+
 
     private User(Guid id, string firstName, string lastName, string email, string phoneNumber, double balance, DateTime dateOfBirth, bool isAdmin)
     {
@@ -54,4 +60,10 @@ public class User : Entity
     {
         Balance += amount;
     }
+
+    public void RemoveAmount(double amount)
+    {
+        Balance -= amount;
+    }
+
 }

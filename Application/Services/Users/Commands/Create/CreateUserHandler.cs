@@ -70,7 +70,9 @@ public class CreateUserHandler :
            PhoneNumber: user.PhoneNumber,
            Balance: user.Balance,
            DateOfBirth: user.DateOfBirth,
-           IsAdmin: user.IsAdmin
+           IsAdmin: user.IsAdmin,
+           SentTransactions: user.SentTransactions,
+           ReceivedTransactions: user.ReceivedTransactions
         ));
     }
 }

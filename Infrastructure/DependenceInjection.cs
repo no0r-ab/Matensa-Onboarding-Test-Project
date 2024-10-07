@@ -17,8 +17,7 @@ namespace Infrastructure
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserTokenRepository, UserTokenRepository>();
             services.AddScoped<IPasswordHasher, PasswordHasher>();
-
-            //services.AddScoped<IPasswordHasher<Domain.Users.User>, PasswordHasher<Domain.Users.User>>();
+            services.AddScoped<ITransactionRepository, TransactionRepository>();
 
             return services;
         }

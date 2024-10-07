@@ -36,7 +36,9 @@ public class UpdateUserHandler : IRequestHandler<UpdateUserCommand, Result<UserR
             PhoneNumber: updatedUser.PhoneNumber,
             Balance: updatedUser.Balance,
             DateOfBirth: updatedUser.DateOfBirth,
-            IsAdmin: updatedUser.IsAdmin
+            IsAdmin: updatedUser.IsAdmin,
+            SentTransactions: user.SentTransactions,
+            ReceivedTransactions: user.ReceivedTransactions
             ));
     }
 }

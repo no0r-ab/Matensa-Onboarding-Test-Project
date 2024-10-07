@@ -97,6 +97,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddApplication().AddInfrastructure().AddPresentation();
+builder.Services.AddHttpContextAccessor();
 
 var app = builder.Build();
 

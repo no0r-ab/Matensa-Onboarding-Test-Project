@@ -25,20 +25,6 @@ public class RepositoryBase<T> : IRepository<T> where T : Entity
         return entity;
     }
 
-    public async Task<T> Delete(Guid id)
-    {
-        var entity = await _dbSet.FindAsync(id);
-        if (entity == null)
-        {
-            return entity;
-        }
-
-        _dbSet.Remove(entity);
-        await _context.SaveChangesAsync();
-
-        return entity;
-    }
-
     public async Task<T> Get(Guid id)
     {
         return await _dbSet.FindAsync(id);
@@ -51,14 +37,16 @@ public class RepositoryBase<T> : IRepository<T> where T : Entity
         return await usersQuery.ToListAsync();
     }
 
-    public async Task<T> Update(T entity)
+    public async Task<IEnumerable<T>> UpdateList(IEnumerable<T> entities)
     {
-        _context.Entry(entity).State = EntityState.Modified;
+        foreach (var entity in entities)
+        {
+            _context.Entry(entity).State = EntityState.Modified;
+        }
+
         await _context.SaveChangesAsync();
-        return entity;
+        return entities;
     }
-
-
 
     public async Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {

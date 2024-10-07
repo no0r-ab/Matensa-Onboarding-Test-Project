@@ -16,6 +16,8 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, Result<UserR
     public async Task<Result<UserResult>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
     {
         var result = await _userRepository.GetByIdAsync(request.Id);
+        if(result is null)
+            return Result<UserResult>.Failure(Error.Validation("User Does Not Exist."));
 
         return Result<UserResult>.Success(new UserResult(
             Id: result.Id,
@@ -24,7 +26,9 @@ public class GetUserByIdHandler : IRequestHandler<GetUserByIdQuery, Result<UserR
             PhoneNumber: result.PhoneNumber,
             Balance: result.Balance,
             DateOfBirth: result.DateOfBirth,
-            IsAdmin: result.IsAdmin
+            IsAdmin: result.IsAdmin,
+            SentTransactions: result.SentTransactions,
+            ReceivedTransactions: result.ReceivedTransactions
             ));
     }
 }

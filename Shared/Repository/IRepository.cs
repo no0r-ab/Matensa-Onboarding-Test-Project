@@ -11,9 +11,7 @@ public interface IRepository<T> where T : IEntity
 
     Task<T> Add(T entity);
 
-    Task<T> Update(T entity);
-    
-    Task<T> Delete(Guid id);
+    Task<IEnumerable<T>> UpdateList (IEnumerable<T> entities);
 
     Task<T> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 

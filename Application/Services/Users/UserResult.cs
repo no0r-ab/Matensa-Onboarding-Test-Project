@@ -1,4 +1,6 @@
-﻿namespace Application.Services.Users;
+﻿using Domain.Transactions;
+
+namespace Application.Services.Users;
 
 public record UserResult(
     Guid Id,
@@ -7,6 +9,8 @@ public record UserResult(
     string PhoneNumber,
     double Balance,
     DateTime DateOfBirth,
-    bool IsAdmin
+    bool IsAdmin,
+    ICollection<Transaction> SentTransactions,
+    ICollection<Transaction> ReceivedTransactions
     );
 

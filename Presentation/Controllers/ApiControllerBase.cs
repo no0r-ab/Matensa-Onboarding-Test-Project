@@ -11,8 +11,6 @@ namespace Presentation.Controllers;
 [ApiController]
 public class ApiControllerBase : ControllerBase
 {
-    protected IStringLocalizer<ApiControllerBase> _localizer =>
-        HttpContext.RequestServices.GetService<IStringLocalizer<ApiControllerBase>>();
 
     protected IActionResult Problem(List<Error> errors)
     {
@@ -48,7 +46,7 @@ public class ApiControllerBase : ControllerBase
         HttpContext.Response.StatusCode = statusCode; // Set status code directly
 
         // Return a ProblemDetails object with the localized error description
-        return CreateProblem(_localizer[error.Description]);
+        return CreateProblem(error.Description);
     }
 
     private IActionResult CreateProblem(string title)
@@ -73,7 +71,7 @@ public class ApiControllerBase : ControllerBase
         {
             modelStateDictionary.AddModelError(
                 error.Code,
-                _localizer[error.Description]);
+                error.Description);
         }
 
         return ValidationProblem(modelStateDictionary);

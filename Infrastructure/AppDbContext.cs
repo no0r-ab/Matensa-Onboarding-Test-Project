@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Domain.Users;
+using Domain.Transactions;
 
 namespace Infrastructure
 {
@@ -12,6 +13,7 @@ namespace Infrastructure
 
         public DbSet<User> Users { get; set; }
         public DbSet<UserToken> UserTokens { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,23 @@ namespace Infrastructure
             {
                 entity.Property(u => u.Email).IsRequired();
                 entity.HasIndex(u => u.Email).IsUnique();
+
+                entity.HasMany(u => u.SentTransactions)
+                      .WithOne()
+                      .HasForeignKey(t => t.SenderId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(u => u.ReceivedTransactions)
+                      .WithOne()
+                      .HasForeignKey(t => t.ReceiverId)
+                      .OnDelete(DeleteBehavior.Cascade);
+            });
+
+            // Transaction entity configuration (if needed)
+            modelBuilder.Entity<Transaction>(entity =>
+            {
+                entity.Property(t => t.Amount).IsRequired();
+
             });
         }
     }

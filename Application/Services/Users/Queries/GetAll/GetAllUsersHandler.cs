@@ -15,7 +15,7 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, Result<IEnum
 
     public async Task<Result<IEnumerable<UserResult>>> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
     {
-        var result = await _userRepository.GetAll();
+        var result = _userRepository.GetAll(true);
 
         var users = result.Select(user => new UserResult(
              Id: user.Id,
@@ -24,7 +24,9 @@ public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, Result<IEnum
              PhoneNumber: user.PhoneNumber,
              Balance: user.Balance,
              DateOfBirth: user.DateOfBirth,
-             IsAdmin: user.IsAdmin
+             IsAdmin: user.IsAdmin,
+             SentTransactions: user.SentTransactions,
+             ReceivedTransactions: user.ReceivedTransactions
             ));
 
         return Result<IEnumerable<UserResult>>.Success(users);
